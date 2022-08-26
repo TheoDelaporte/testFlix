@@ -39,6 +39,8 @@ class ListSeriesTable extends Table
     {
         parent::initialize($config);
 
+        $this->addBehavior('Search.Search');
+
         $this->setTable('list_series');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
@@ -53,6 +55,8 @@ class ListSeriesTable extends Table
         ]);
 
         $this->addBehavior('Timestamp');
+        $this->searchManager()
+            ->like('searchBySerieName', ['fields' => 'serie_name', 'before' => true, 'after' => true]);
     }
 
     /**

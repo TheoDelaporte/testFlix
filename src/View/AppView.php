@@ -40,5 +40,6 @@ class AppView extends View
         parent::initialize();
 
         $this->loadHelper('AssetMix.AssetMix');
+        $this->loadHelper('Search.Search');
     }
 }
