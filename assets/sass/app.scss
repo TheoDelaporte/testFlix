@@ -1,0 +1,12 @@
+$primary: grey;
+
+:root {
+    --primary-colour: #E50914;
+    --shadow-colour: black;
+    --shadow-intensity: 0.6;
+    --UIControlsSize: 30px;
+}
+
+.app {
+    background: $primary;
+}

@@ -1,0 +1,42 @@
+version: "3.1"
+
+volumes:
+  database:
+
+services:
+  php-fpm:
+    build: .
+    container_name: testFlix-webserver
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/webroot
+      - COMPOSER_VERSION=2
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+  mysql:
+    image: mysql/mysql-server:5.7
+    container_name: testFlix-mysql
+    working_dir: /app
+    environment:
+      - MYSQL_ROOT_PASSWORD=verySecret
+      - MYSQL_DATABASE=testFlix
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - .:/app
+      - database:/var/lib/mysql
+      #        Add this to initialise the test db
+      - ./docker-mysql:/docker-entrypoint-initdb.d
+    command: mysqld --character-set-server=utf8 --init-connect='SET NAMES UTF8;'
+    ports:
+      - "3306:3306"
+  mailhog:
+    image: 'mailhog/mailhog:latest'
+    container_name: testFlix-mailhog
+    ports:
+      - '1025:1025'
+      - '8025:8025'
