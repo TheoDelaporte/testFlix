@@ -36,7 +36,7 @@ class ListSeriesController extends AppController
 
         $listSeries = $this->paginate($query);
 
-        $this->set(compact('listSeries', 'categories'));
+        $this->set(compact('listSeries'));
     }
 
     /**
