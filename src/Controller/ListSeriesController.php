@@ -11,6 +11,14 @@ namespace App\Controller;
  */
 class ListSeriesController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->loadComponent('Search.Search', [
+            'actions' => ['index'],
+        ]);
+    }
     /**
      * Index method
      *
@@ -23,9 +31,12 @@ class ListSeriesController extends AppController
             'limit' => 12,
         ];
 
-        $listSeries = $this->paginate($this->ListSeries);
+        $query = $this->ListSeries
+            ->find('search', ['search' => $this->request->getQueryParams()]);
 
-        $this->set(compact('listSeries'));
+        $listSeries = $this->paginate($query);
+
+        $this->set(compact('listSeries', 'categories'));
     }
 
     /**
