@@ -51,3 +51,4 @@ nbproject/*
 
 # Compiled files by assets mix
 /webroot/*
+/webroot/.htaccess
