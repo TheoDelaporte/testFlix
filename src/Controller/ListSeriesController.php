@@ -11,6 +11,11 @@ namespace App\Controller;
  */
 class ListSeriesController extends AppController
 {
+    /**
+     * Initialization search
+     *
+     * @return void
+     */
     public function initialize(): void
     {
         parent::initialize();
@@ -19,6 +24,7 @@ class ListSeriesController extends AppController
             'actions' => ['index'],
         ]);
     }
+
     /**
      * Index method
      *

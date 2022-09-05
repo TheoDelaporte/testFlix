@@ -29,7 +29,6 @@ class SeriesController extends AppController
             ->where(['listSerie_id' => $id])
             ->orderAsc('episode_rank')
             ->toArray();
-        dd($series);
 
         $this->set(compact('series'));
     }
