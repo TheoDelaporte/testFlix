@@ -1,54 +1,73 @@
-# CakePHP Application Skeleton
+# Mise en place de l'environnement de développement
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+🔀 Il existe deux environnements pour le développement local:
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 4.x.
+- [Environnement Docker](#environnement-via-docker) ✅ (conseillé)
+- [Environnement Homestead](environnement_local.mdnvironnement-via-homestead)
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+## 🐳 Environnement via Docker
 
-## Installation
+Copier les variables d'environnement par défaut dans un fichier .env :
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+```cp config/.env.example config/.env```
 
-If Composer is installed globally, run
+Depuis la racine du projet, exécutez les commandes :
 
-```bash
-composer create-project --prefer-dist cakephp/app
+- `docker-compose up -d`
+  Construction de l'image Docker et démarrage des conteneurs
+
+- `composer install` Installation des dépendances PHP
+
+- `bin/cake migrations migrate` Execution des migrations pour créer les tables
+
+- `yarn install` Installation des dépendaces Javascript
+
+- `yarn dev` Compilation des assets Javascript
+
+- `yarn watch` Compilation automatique des assets Javascript
+
+
+Rendez-vous à l'adresse [http://localhost](http://localhost) pour accéder au projet
+
+### 🔐 Créer un compte utilisateur en local
+
+Ouvrez un terminal dans le conteneur PHP en vous rendant dans le cli du webserver docker afin d'exécuter la commande suivante.
+
+```
+bin/cake users add_user -e monNomDutilisateur -u mon@mail.fr -p monMotDePasse -r admin
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+## Environnement via Homestead
+
+- Créez une base de données "testFlix"
+
+- Copiez la configuration défaut
+
+```cmd
+cp config/.env.example config/.env
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+(Adaptez le fichier `config/.env` à votre configuration locale)
 
-```bash
-bin/cake server -p 8765
+- Installez les dépendances
+
+```cmd
+composer install
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+- Lancez le script de migrations de la base de données
 
-## Update
+```cmd
+scripts/migrations.sh
+```
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+### Configuration Homestead
 
-## Configuration
+Dans votre `Homestead.yaml`, ajoutez les lignes suivantes.
 
-Read and edit the environment specific `config/app_local.php` and setup the 
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
-
-## Layout
-
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
-# testFlix
+```
+    - map: indelec.test
+      to: /home/vagrant/code/testFlix
+      type: "apache"
+```

@@ -24,6 +24,7 @@ class ListSeriesFixture extends TestFixture
                 'serie_image' => 'Lorem ipsum dolor sit amet',
                 'created' => '2022-08-16 14:16:10',
                 'modified' => '2022-08-16 14:16:10',
+                'category_id' => 1,
             ],
         ];
         parent::init();
