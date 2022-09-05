@@ -67,7 +67,7 @@ scripts/migrations.sh
 Dans votre `Homestead.yaml`, ajoutez les lignes suivantes.
 
 ```
-    - map: indelec.test
+    - map: test-flix.test
       to: /home/vagrant/code/testFlix
       type: "apache"
 ```
