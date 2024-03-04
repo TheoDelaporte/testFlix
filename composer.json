@@ -12,7 +12,7 @@
         "friendsofcake/bootstrap-ui": "^4.0",
         "friendsofcake/search": "^6.2",
         "ishanvyas22/asset-mix": "^1.4",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^4.8"
     },
     "require-dev": {
         "cakephp/bake": "^2.6",
